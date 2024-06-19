@@ -1,4 +1,4 @@
 # Group Members
-1. Name (https://github.com/name/iotclass67)
-1. Name (https://github.com/name/iotclass67)
-1. Name (https://github.com/name/iotclass67)
+1. SUPAKIT GRUDSORN (https://github.com/ballkungZ/iotclass67)
+1. BOONYAKORN KERDPUM (https://github.com/bbiggy/iotclass67)
+
