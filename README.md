@@ -4,13 +4,13 @@ Internet of things Class 2567
 # Table of Contents
 
 - [ ] [Main technologies of architectures](https://github.com/ballkungZ/iotclass67/tree/main/assignment00)
-- [ ] Setting up servers and components. https://gibhub.com
-- [ ] Compose services. https://gibhub.com
-- [ ] Ingest and store real-time data from IoT sensors. https://gibhub.com
-- [ ] Analyze and make aggregations. https://gibhub.com
-- [ ] Store data. https://gibhub.com
-- [ ] Data Visualization.  https://gibhub.com
-- [ ] Used technologies. https://gibhub.com
+- [ ] [Setting up servers and components.](https://github.com/ballkungZ/iotclass67/tree/main/assignment01)
+- [ ] [Compose services.](https://github.com/ballkungZ/iotclass67/tree/main/assignment03)
+- [ ] [Ingest and store real-time data from IoT sensors.](https://github.com/ballkungZ/iotclass67/tree/main/assignment04)
+- [ ] [Analyze and make aggregations.](https://github.com/ballkungZ/iotclass67/tree/main/assignment05)
+- [ ] [Store data.](https://github.com/ballkungZ/iotclass67/tree/main/assignment06)
+- [ ] [Data Visualization.](https://github.com/ballkungZ/iotclass67/tree/main/assignment07)
+- [ ] [Used technologies.](https://github.com/ballkungZ/iotclass67/tree/main/assignment08)
 
 
 Iot Event Streaming Architecture.[^1]
