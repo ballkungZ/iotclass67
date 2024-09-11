@@ -94,12 +94,3 @@ File Path: kafka_connect/data/scripts/config/connect-prometheus-sink.json
 }
 ```
 
-
-### ข้อจำกัด Prometheus Connector
-* ไม่รอบรับ Timestamp: Prometheus ใช้ timestamp จากการดึงข้อมูล (scrape) แต่ละครั้ง ดังนั้น timestamp ใน Kafka records จะถูกละเว้น
-
-* Pull-based Connector: ดึงข้อมูลผ่าน HTTP server บน worker node โดยที่ metric ทั้งหมดจะถูกเผยแพร่ผ่าน HTTP endpoint ที่กำหนดด้วย property prometheus.scrape.url ซึ่งต้องถูกเพิ่มลงในไฟล์การตั้งค่า prometheus.yml
-
-* Metric type: Metrics ส่วนใหญ่จะถูกตีความเป็น gauge type (ตัวเลขที่เพิ่ม / ลด เช่น อุณหภูมิ) ยกเว้น counter type ที่ใช้สำหรับค่าที่เพิ่มขึ้นเพียงอย่างเดียว
-
-* Buffer Limit: Connector จะมี buffer ขนาด 3 ล้าน metric items เพื่อให้ Prometheus มีเวลาเพียงพอในการอ่านและประมวลผลข้อมูลระหว่างการดึงข้อมูลแต่ละครั้ง
