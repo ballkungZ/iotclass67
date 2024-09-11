@@ -4,6 +4,7 @@
 Mqtt Topic ผมเซ็ตให้เป็น iot-frames
 
 ## MQTT Payload
+```
 StaticJsonDocument<512> doc; 
 // กำหนดค่าต่าง ๆ ใน JSON
 doc["id"] = "43245253";
@@ -39,7 +40,7 @@ payload["luminosity"] = l;
 // แปลงเอกสาร JSON เป็นสตริง
 char jsonBuffer[512];
 serializeJson(doc, jsonBuffer);
-
+```
 ## ESP32
 
 ```cpp
