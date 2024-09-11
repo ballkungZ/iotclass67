@@ -1,1 +1,18 @@
 # Used technology
+-Spring Boot 2.3.3 / Apache Maven 3.6.3<br>
+-Spring Boot Starter Actuator<br>
+-Kafka Streams<br>
+-Spring Kafka<br>
+-Micrometer Registry Prometheus<br>
+-Eclipse Paho MQTT Client<br>
+-Kafka Connect<br>
+-Kafka Rest Proxy<br>
+-Jackson<br>
+-NodeExporter<br>
+-kafka-exporter<br>
+-Prometheus<br>
+-Grafana<br>
+-Eclipse Mosquitto<br>
+-MongoDB<br>
+-Mongo DB Express
+-Cadvisor
