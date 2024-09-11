@@ -94,7 +94,7 @@ cd /etc/grafana
 ```
 
 - แก้ไขไฟล์ grafana.ini
-                                                                                                                                                                                                            
+
 ```bash
 vim grafana.ini
 ```
@@ -134,7 +134,7 @@ docker compose restart grafana
 
 ### 1. การสร้าง floor plan หรืออื่น ๆ ตามต้องการ
 
-1. กด add เพื่อเพิ่ม widget ในหน้า dashboard โดยการเลือก FlowCharting และเราจะได้ chart เริ่มต้นของ plugin นี้มาดังรูป
+1. กด add เพื่อเพิ่ม Visualization ในหน้า dashboard โดยการเลือก FlowCharting และเราจะได้ chart เริ่มต้นของ plugin นี้มาดังรูป
 
 ![flowcharting1](./assets/flowcharting1.png)
 </br>
@@ -221,7 +221,7 @@ docker compose restart grafana
 ![map-floor](./assets/map-floor.png)
 </br>
 
-- สุดท้าย กำหนดค่า treshold ของสีที่ใช้แสดงว่า ถ้าค่าใน range ไหนให้สีอะไร ตามความต้องการและความเหมาะสมของค่าข้อมูล เช่น หากเราเลือกใช้ค่าอุณหภูมิ ก็อาจจะตั้งให้ค่าสีเป็นไปตาม range ที่ว่าหากอุณภูมิเกิน 30 ให้ขึ้นสีแดงเพื่อเหมือนให้เข้าใจว่าอุณหูมิสูงเกินแล้ว เป็นต้น
+- สุดท้าย กำหนดค่า treshold ของสีที่ใช้แสดงว่า ถ้าค่าใน range ไหนให้สีอะไร ตามความต้องการและความเหมาะสมของค่าข้อมูล เช่น หากเราเลือกใช้ค่าอุณหภูมิ ก็อาจจะตั้งให้ค่าสีเป็นไปตาม range ที่ว่าหากอุณภูมิเกิน 36 ให้ขึ้นสีแดงเพื่อเหมือนให้เข้าใจว่าอุณหูมิสูงเกินแล้ว เป็นต้น
 
 ![threshold](./assets/threshold.png)
 </br>
@@ -235,23 +235,15 @@ docker compose restart grafana
 
 ## <mark>สรุปภาพรวม</mark>
 
-![floorplan](./assets/floorplan.png)
+![0](./assets/floorplan.png)
 </br>
 
-![humidity](./assets/humidity.png)
+![1](./assets/1.png)
 </br>
 
-![temp](./assets/temp.png)
+![2](./assets/2.png)
 </br>
 
-![temp time](./assets/temp-timeseries.png)
+![3](./assets/3.png)
 </br>
 
-![light](./assets/light.png)
-</br>
-
-![pressure](./assets/pressure.png)
-</br>
-
-![overall](./assets/overall.png)
-</br>
