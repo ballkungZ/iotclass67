@@ -42,7 +42,7 @@ serializeJson(doc, jsonBuffer);
 
 ## ESP32
 
-```
+```cpp
     #include <WiFi.h>
     #include <NTPClient.h>
     #include <WiFiUdp.h>
