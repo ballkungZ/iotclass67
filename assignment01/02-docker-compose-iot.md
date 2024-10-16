@@ -27,18 +27,12 @@ services:
         - kafka-data:/var/lib/kafka
         restart: unless-stopped
         environment:
-        # Required. Instructs Kafka how to get in touch with ZooKeeper.
         KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
         KAFKA_NUM_PARTITIONS: 1
         KAFKA_COMPRESSION_TYPE: gzip
-        # Required when running in a single-node cluster, as we are. We would be able to take the default if we had
-        # three or more nodes in the cluster.
         KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
         KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
         KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
-        # Required. Kafka will publish this address to ZooKeeper so clients know
-        # how to get in touch with Kafka. "PLAINTEXT" indicates that no authentication
-        # mechanism will be used.
         KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
         KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'true'
         links:
@@ -48,23 +42,10 @@ services:
         image: confluentinc/cp-kafka-rest:latest
         container_name: kafka-rest-proxy
         environment:
-        # Specifies the ZooKeeper connection string. This service connects
-        # to ZooKeeper so that it can broadcast its endpoints as well as
-        # react to the dynamic topology of the Kafka cluster.
         KAFKA_REST_ZOOKEEPER_CONNECT: zookeeper:2181
-        # The address on which Kafka REST will listen for API requests.
         KAFKA_REST_LISTENERS: http://0.0.0.0:8082/
-        # Required. This is the hostname used to generate absolute URLs in responses.
-        # It defaults to the Java canonical hostname for the container, which might
-        # not be resolvable in a Docker environment.
         KAFKA_REST_HOST_NAME: kafka-rest-proxy
-        # The list of Kafka brokers to connect to. This is only used for bootstrapping,
-        # the addresses provided here are used to initially connect to the cluster,
-        # after which the cluster will dynamically change. Thanks, ZooKeeper!
         KAFKA_REST_BOOTSTRAP_SERVERS: kafka:9092
-        # Kafka REST relies upon Kafka, ZooKeeper
-        # This will instruct docker to wait until those services are up
-        # before attempting to start Kafka REST.
         restart: unless-stopped
         ports:
         - "9999:8082"
@@ -77,35 +58,18 @@ services:
         hostname: kafka-connect
         container_name: kafka-connect
         environment:
-        # Required.
-        # The list of Kafka brokers to connect to. This is only used for bootstrapping,
-        # the addresses provided here are used to initially connect to the cluster,
-        # after which the cluster can dynamically change. Thanks, ZooKeeper!
         CONNECT_BOOTSTRAP_SERVERS: "kafka:9092"
-        # Required. A unique string that identifies the Connect cluster group this worker belongs to.
         CONNECT_GROUP_ID: kafka-connect-group
-        # Connect will actually use Kafka topics as a datastore for configuration and other data. #meta
-        # Required. The name of the topic where connector and task configuration data are stored.
         CONNECT_CONFIG_STORAGE_TOPIC: kafka-connect-meta-configs
-        # Required. The name of the topic where connector and task configuration offsets are stored.
         CONNECT_OFFSET_STORAGE_TOPIC: kafka-connect-meta-offsets
-        # Required. The name of the topic where connector and task configuration status updates are stored.
         CONNECT_STATUS_STORAGE_TOPIC: kafka-connect-meta-status
-        # Required. Converter class for key Connect data. This controls the format of the
-        # data that will be written to Kafka for source connectors or read from Kafka for sink connectors.
         CONNECT_KEY_CONVERTER: org.apache.kafka.connect.json.JsonConverter
-        # Required. Converter class for value Connect data. This controls the format of the
-        # data that will be written to Kafka for source connectors or read from Kafka for sink connectors.
         CONNECT_VALUE_CONVERTER: org.apache.kafka.connect.json.JsonConverter
-        # Required. The hostname that will be given out to other workers to connect to.
         CONNECT_REST_ADVERTISED_HOST_NAME: "kafka-connect"
         CONNECT_REST_PORT: 8083
-        # The next three are required when running in a single-node cluster, as we are.
-        # We would be able to take the default (of 3) if we had three or more nodes in the cluster.
         CONNECT_CONFIG_STORAGE_REPLICATION_FACTOR: "1"
         CONNECT_OFFSET_STORAGE_REPLICATION_FACTOR: "1"
         CONNECT_STATUS_STORAGE_REPLICATION_FACTOR: "1"
-        #Connectos path
         CONNECT_PLUGIN_PATH: "/usr/share/java,/data/connectors/"
         CONNECT_LOG4J_ROOT_LOGLEVEL: "INFO"
         restart: unless-stopped
@@ -131,9 +95,6 @@ services:
             echo -e "\n--\n+> Creating Kafka Connect Prometheus sink Current PATH ($$PWD)"
             /data/scripts/create_prometheus_sink.sh
             sleep infinity
-        # kafka-connect relies upon Kafka and ZooKeeper.
-        # This will instruct docker to wait until those services are up
-        # before attempting to start kafka-connect.
         depends_on:
         - zookeeper
         - kafka
