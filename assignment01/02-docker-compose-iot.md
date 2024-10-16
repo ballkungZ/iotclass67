@@ -3,7 +3,6 @@
 ### docker-compose.yaml
 ```yaml
 services:
-    # zookeeper เป็นระบบจัดการและประสานงานแบบกระจาย (distributed coordination service) โดยใช้ในระบบที่มีความซับซ้อนและต้องการความเสถียรสูง เช่น Apache Kafka, Hadoop, และ Hbase
     zookeeper:
         image: confluentinc/cp-zookeeper
         container_name: zookeeper
@@ -21,7 +20,6 @@ services:
         ZOOKEEPER_AUTOPURGE_SNAP_RETAIN_COUNT: 10
         ZOOKEEPER_AUTOPURGE_PURGE_INTERVAL: 3
     
-    # Kafka คือระบบจัดคิวข้อความแบบกระจาย (distributed message queue) ที่สามารถรับส่งข้อมูลในปริมาณมากได้อย่างมีประสิทธิภาพ Kafka เหมาะสำหรับระบบที่ต้องการความสามารถในการส่งข้อมูลระหว่างแอปพลิเคชันหลายตัวในรูปแบบที่เสถียรและปรับขนาดได้
     kafka:
         image: confluentinc/cp-kafka
         container_name: kafka
@@ -46,7 +44,6 @@ services:
         links:
         - zookeeper
 
-    # kafka-rest-proxy เป็นเครื่องมือหรืออินเทอร์เฟซที่ช่วยให้ผู้ใช้สามารถสื่อสารกับ Kafka brokers ผ่าน HTTP API แทนที่จะใช้ Kafka client โดยตรง ซึ่งทำให้การเชื่อมต่อกับ Kafka ง่ายขึ้นสำหรับแอปพลิเคชันหรือบริการที่ไม่รองรับ Kafka client libraries หรือไม่ได้เขียนด้วยภาษาที่ Kafka รองรับโดยตรง
     kafka-rest-proxy:
         image: confluentinc/cp-kafka-rest:latest
         container_name: kafka-rest-proxy
@@ -75,7 +72,6 @@ services:
         - zookeeper
         - kafka
 
-    # kafka-connect เป็นเครื่องมือที่ทำหน้าที่เชื่อมต่อและแปลงข้อมูลระหว่างระบบต้นทาง (source systems) และระบบปลายทาง (target systems) โดยไม่ต้องสร้าง producer และ consumer ขึ้นมาเอง Kafka Connect ช่วยลดความซับซ้อนในการทำงานกับข้อมูลจำนวนมากที่อยู่ใน Kafka
     kafka-connect:
         image: confluentinc/cp-kafka-connect:latest
         hostname: kafka-connect
@@ -142,7 +138,6 @@ services:
         - zookeeper
         - kafka
     
-    # mosquitto เป็นซอฟต์แวร์โอเพ่นซอร์สที่ทำหน้าที่เป็น MQTT broker ซึ่งเป็นโปรโตคอลที่ใช้ในการสื่อสารระหว่างอุปกรณ์ IoT ด้วยการออกแบบที่มีประสิทธิภาพและใช้ทรัพยากรน้อย ทำให้ Eclipse Mosquitto เหมาะสำหรับงานที่เกี่ยวกับ IoT
     mosquitto:
         image: eclipse-mosquitto:latest
         hostname: mosquitto
@@ -156,7 +151,6 @@ services:
         - ./mosquitto/data:/mosquitto/data
         - ./mosquitto/log:/mosquitto/log
     
-    # mongo เป็นฐานข้อมูล NoSQL ที่ได้รับความนิยมซึ่งออกแบบมาให้จัดเก็บข้อมูลในรูปแบบที่ยืดหยุ่น MongoDB เหมาะสำหรับการจัดการข้อมูลปริมาณมาก โดยนักพัฒนาสามารถปรับแต่งการทำงานของระบบเพื่อสร้างแอปพลิเคชันที่ทันสมัยและขับเคลื่อนด้วยข้อมูลได้อย่างง่ายดาย
     mongo:
         image: mongo:4.4.20
         container_name: mongo
@@ -168,7 +162,6 @@ services:
         - MONGO_INITDB_ROOT_PASSWORD=${MONGO_ROOT_PASSWORD}
         - MONGO_INITDB_DATABASE=${MONGO_DB}
 
-    # grafana เป็นเครื่องมือสร้างแดชบอร์ดที่สามารถแสดงข้อมูลจากเมตริกต่าง ๆ ในรูปแบบกราฟแบบเรียลไทม์ Grafana รองรับการดึงข้อมูลจากแหล่งข้อมูลยอดนิยม เช่น Prometheus, InfluxDB, Elasticsearch, AWS CloudWatch
     grafana:
         image: grafana/grafana:latest-ubuntu
         container_name: grafana
@@ -192,7 +185,6 @@ services:
         ports:
         - '8085:3000'
 
-    # prometheus เป็นระบบมอนิเตอร์ริ่งและเตือนภัยแบบโอเพ่นซอร์สที่ออกแบบมาเพื่อรวบรวมและจัดเก็บข้อมูลเมตริกในรูปแบบ time series data เหมาะสำหรับการมอนิเตอร์ระบบและแอปพลิเคชันต่าง ๆ โดยมีการทำงานแบบกระจายและมีความยืดหยุ่นสูง Prometheus สามารถทำงานร่วมกับ Grafana เพื่อสร้างกราฟแสดงข้อมูลแบบเรียลไทม์
     prometheus:
         image: prom/prometheus:latest
         container_name: prometheus
@@ -210,7 +202,6 @@ services:
         ports:
         - '8086:9090'
 
-    # iot-processor เป็นการประมวลผลข้อมูลที่ได้จากเซ็นเซอร์ ข้อมูลที่เก็บมาอาจจะถูกส่งไปยังระบบประมวลผลหรือเซิร์ฟเวอร์กลาง การประมวลผลอาจรวมถึง
     iot-processor:
         image: ssanchez11/iot_processor:0.0.1-SNAPSHOT
         container_name: iot-processor
@@ -222,7 +213,6 @@ services:
             condition: service_started
             restart: true
 
-    # IoT sensor 1 เป็น sensor ที่ถูกจําลองด้วยไมโครเซอร์วิสที่ใช้ใน Spring Boot (ผ่านไลบรารี Eclipse Paho MQTT) ที่ถูกติดตั้งอยู่บนเซิฟเวอร์ โดยจะส่งข้อมูล telemetry ไปยังโบรกเกอร์ Eclipse Mosquitto ข้อมูลที่ถูกจำลองนี้ generate ค่า ทุกอย่างภายใน payload มาจาก Callable โดยจะถูกสร้างขึ้นทุกวินาทีและ มี payload ในรูปแบบที่สร้างขึ้นให้ตรงกัน
     iot_sensor_1:
         image: ssanchez11/iot_sensor:0.0.1-SNAPSHOT
         build:
