@@ -205,7 +205,7 @@ sh start_0zookeeper_kafka.sh
 - kafka
 
 
-เมื่อรันคำสั่ง รอจนกว่า service kafka zookeeper จะนิ่งถึงจะรัน `start-service #1` ต่อไป
+เมื่อรันคำสั่ง รอจนกว่า service kafka zookeeper จะนิ่งแล้วถึงจะรัน `start-service #1` ต่อไป
 
 
 ## start-service #1
@@ -221,8 +221,7 @@ sh start_1kafka_service.sh
 - prometheus
 
 
-เมื่อรันคำสั่ง รอจนกว่า terminal จะแสดง 
-`kafka-connect Kafka Connect listener HTTP state:  000  (waiting for 200)` ถึงจะรัน `start-service #2` ต่อไป
+เมื่อรันคำสั่ง รอจนกว่า terminal จะขึ้นว่า `kafka-connect Kafka Connect listener HTTP state:  000  (waiting for 200)` ถึงจะรัน `start-service #2` ต่อไปได้
 
 ## start-service #2
 ```bash
@@ -231,7 +230,7 @@ sh start_2iot_processor.sh
 #### service
 - iot-processor
 
-รอจนกว่า iot-processor ขึ้น initialize ถึงจะรัน `start-service #3` ต่อไป
+รอจนกว่า iot-processor จะขึ้นว่า initialize ถึงจะรัน `start-service #3` ต่อไป
 
 ## start-service #3
 ```bash
