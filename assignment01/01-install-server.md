@@ -21,6 +21,21 @@
     -SSH setup
     
 6.  Finish the installation
+## Set Up Server
+
+### Install vim
+   ```
+    sudo apt install vim -y
+   ```
+### Install ifconfig (part of the net-tools package)
+   ```
+    sudo apt install net-tools -y
+   ``` 
+### Install git
+   ```
+    sudo apt install git -y
+   ```
+set ip network (net-tools) for ssh from local notebook
 
 
 ## How to install Docker
