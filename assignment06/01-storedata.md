@@ -68,8 +68,8 @@ File Path: kafka_connect/data/scripts/config/connect-mongodb-iot-aggregate-metri
    }
 }
 ```
-
-ในส่วนของข้อมูลที่เป็น Time Serires จะต้องเก็บข้อมูลไปที่ Prometheus โดยจะดึงข้อมูลจาก Topic "iot-metric-time-series" โดย Prometheus ดึงข้อมูลผ่าน HTTP server
+## Prometheus 
+ในส่วนของข้อมูลที่เป็น Time Serires จะต้องเก็บข้อมูลไปที่ Prometheus โดยจะดึงข้อมูลจาก Topic "iot-metric-time-series" ไปยังฐานข้อมูลได้ Prometheus จะได้รับข้อมูลผ่านระบบการสำรวจข้อมูล ดังนั้นตัวเชื่อมต่อนี้จึงเปิดใช้งานเซิร์ฟเวอร์ HTTP ที่ Prometheus สามารถค้นหาข้อมูลได้
 
 File Path: kafka_connect/data/scripts/config/connect-prometheus-sink.json
 ```json
